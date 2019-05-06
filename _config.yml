@@ -1,9 +1,9 @@
 # Site settings
-title: Liang Ke Jin
-description: Liang Ke Jin
-favicon: /assets/img/avatar.JPG
+title: Karl Brian
+description: Karl Brian
+favicon: /assets/img/headPortrait.jpg
 baseurl:
-url: https://liungkejin.github.io
+url: https://karlbrian.github.io
 rss_url:
 
 # Build settings
