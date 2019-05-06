@@ -37,9 +37,3 @@ languages:
 - language2:
   name: English
   proficiency: Limited
-- language3:
-  name: Deutsch
-  proficiency: Basic
-- language4:
-  name: Deutsch
-  proficiency: Basic
