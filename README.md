@@ -1,5 +1,5 @@
-# Kejin
+# Karl
 
-> 自己选的路，跪着也要走下去
+> Study and practice, years of it.
 
 ![Blog](/assets/img/blog.png)

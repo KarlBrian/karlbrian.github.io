@@ -11,7 +11,7 @@ workHistory:
   location: 中国，杭州
   title: 渗透测试工程师
   started: 2019
-  duration: (2019.4 - )
+  duration: (2019.4 - 今)
   description: 学习中
 
 - work1:
@@ -20,7 +20,7 @@ workHistory:
   title: 安全服务工程师
   started: 2018
   duration: (2018.9 - 2018.10)
-  description: 安全巡检、渗透测试
+  description: 安全巡检，渗透测试
 
 educationHistory:
 - education1:
@@ -38,5 +38,8 @@ languages:
   name: English
   proficiency: Limited
 - language3:
+  name: Deutsch
+  proficiency: Basic
+- language4:
   name: Deutsch
   proficiency: Basic
