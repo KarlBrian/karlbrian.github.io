@@ -4,7 +4,7 @@ title: Welcome
 time: 2019年05月06日 星期一
 location: 杭州
 pulished: true
-excerpt_separator: ""
+excerpt_separator: "```"
 ---
 
 欢迎光临，我的朋友。
