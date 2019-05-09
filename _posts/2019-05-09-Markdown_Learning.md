@@ -137,8 +137,6 @@ Markdown 是一种可以使用普通文本编辑器编写的标记语言，通�
 
 ![blockchain](https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&fm=27&gp=0.jpg "区块链")
 
-> 上传本地图片待解决。
-
 ## 六、超链接
 
 语法：
