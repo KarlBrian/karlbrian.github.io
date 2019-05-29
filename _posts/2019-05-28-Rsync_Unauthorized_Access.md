@@ -215,4 +215,44 @@ Permissive
 
 重新上传，上传文件成功，浏览器访问 192.168.xxx.xxx/a.php
 
-![脚本上传成功](https://upload-images.jianshu.io/upload_images/18110176-c5e87b7b4bc408a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![脚本上传成功](https://upload-images.jianshu.io/upload_images/18110176-2ac1beb6e7cc1b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+---
+
+### 3 漏洞修复
+
+---
+
+配置 /etc/rsyncd.conf
+
+```
+motd file -> motd文件位置
+log file -> 日志文件位置
+path -> 默认路径位置
+use chroot -> 是否限定在该目录下，默认为true，当有软连接时，需要改为fasle,如果为true就限定为模块默认目录
+read only -> 只读配置（yes or no）
+list=true -> 是否可以列出模块名
+uid = root -> 传输使用的用户名
+gid = root -> 传输使用的用户组
+auth users -> 认证用户名
+secrets file=/etc/rsyncd.passwd -> 指定密码文件，如果设定验证用户，这一项必须设置，设定密码权限为400,密码文件/etc/rsyncd.passwd的内容格式为：username:password
+hosts allow=192.168.0.101  -> 设置可以允许访问的主机，可以是网段，多个Ip地址用空格隔开
+hosts deny 禁止的主机，host的两项可以使用*表士任意。
+```
+
+主要配置以下几项：
+
+* 配置认证用户名或者密码
+
+* host allow/deny 来控制接入源IP
+
+* uid和gid,使用足够但最小权限的账号进行
+
+* 必要时候可以配置只读
+
+* 非必要应该仅限制配置路径下可访问
+
+
+
+
+
