@@ -25,7 +25,6 @@ Rsync，linux 下一款远程同步软件，能同时同步多台计算机的文
 Rsync 未配置认证用户名密码，导致任意用户可以查看目录、下载文件。
 
 客户端命令：
-
 `rsync [-avz] [--port=xxx] IP::[目录/文件] [目录]`
 
 -a --archive 归档模式，表示递归传输并保持文件属性。
@@ -43,7 +42,6 @@ IP 为服务器 ip，:: 后跟目录则显示目录列表，跟目录+文件则�
 最后的目录为下载到的本地目录。
 
 示例：
-
 `rsync -avz --port=12345 192.168.1.111::test/index.php /home/user`
 
 该命令通过12345端口将 192.168.1.111 中 test/index.php 文件下载到了本地的 /home/user 中。
@@ -53,7 +51,6 @@ IP 为服务器 ip，:: 后跟目录则显示目录列表，跟目录+文件则�
 若 rsync 配置文件中关闭了只读选项，即 "read only = no",则可以对服务器进行文件上传。可以上传带有777权限的 webshell 或者可以命令执行的 php 脚本。
 
 客户端命令：
-
 `rsync [-avz] [--port=xxx] [目录+文件] IP::[目录]`
 
 参数同上，第一处目录+文件为本地待上传的文件，第二处目录为上传目录。
@@ -109,11 +106,9 @@ ping www.baidu.com
 正常访问网络。
 
 2.安装 rsync
-
 `yum install rsync -y`
 
 3.配置 rsync
-
 `vi /etc/rsyncd.conf`
 
 配置基本的信息：
@@ -142,41 +137,33 @@ read only = no # 设置是否只读
 访问 xampp [官网](https://www.apachefriends.org/zh_cn/index.html) ,下载 for Linux 的最新版本 xampp 的 .run 文件。下载完成后上传至服务器的 /opt/ 目录下。
 
 或者在服务的 /opt/ 目录下直接输入命令
-
 `wget https://www.apachefriends.org/xampp-files/7.3.5/xampp-linux-x64-7.3.5-1-installer.run`
 
 给该文件提权
-
 `chmod -R 755 xampp-linux-x64-7.3.5-1-installer.run`
 
 安装 xmapp
-
 `./xampp-linux-x64-7.3.5-1-installer.run`
 
 安装完成后启动 xampp
-
 `/opt/lampp/lampp start`
 
 此时，网站的根目录为 /opt/lampp/htdocs/
 
 5.更改 rsync 默认目录
-
 `vi /etc/rsyncd.conf`
 
 将 path = /home/ 改为 path = /opt/lampp/htdocs/
 
 6.启动 rsync
-
 `systemctl start rsyncd`
 
 7.在 CentOS client 上，连接服务器的 rsync
-
 `rsync 192.168.xxx.xxx::`
 
 发现不能访问，需要关闭服务器的防火墙
 
 CentOS 默认的防火墙为 firewall
-
 `systemctl stop firewalld.service`
 
 客户端即可访问
@@ -184,13 +171,11 @@ CentOS 默认的防火墙为 firewall
 ![访问成功](https://upload-images.jianshu.io/upload_images/18110176-dab7caee4351e14d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 客户端访问 test 目录
-
 `rsync 192.168.xxx.xxx::test`
 
 ![访问目录](https://upload-images.jianshu.io/upload_images/18110176-2291fc185d6844d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 客户端下载 index.php 文件到本地的 /home/ 目录中
-
 `rsync 192.168.xxx.xxx::test/index.php /home/`
 
 ![下载文件](https://upload-images.jianshu.io/upload_images/18110176-2ac135b03ad2b958.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -206,7 +191,6 @@ CentOS 默认的防火墙为 firewall
 ![php 脚本](https://upload-images.jianshu.io/upload_images/18110176-9180b24cff875858.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 将脚本上传至服务器
-
 `rsync a.php 192.168.xxx.xxx::test`
 
 发现上传权限不足，检查 /opt 目录的权限也没有问题，最后发现需要在服务器中关闭 enforce 模式
