@@ -14,6 +14,8 @@ excerpt_separator: "### 1 漏洞原理"
 
 Rsync，linux 下一款远程同步软件，能同时同步多台计算机的文件及目录，并能保持源文件的**权限**、时间、软硬连接等附加信息。
 
+---
+
 ### 1 漏洞原理
 
 ---
@@ -56,6 +58,8 @@ IP 为服务器 ip，:: 后跟目录则显示目录列表，跟目录+文件则�
 
 参数同上，第一处目录+文件为本地待上传的文件，第二处目录为上传目录。
 
+---
+
 ### 2 漏洞复现
 
 ---
@@ -68,9 +72,9 @@ IP 为服务器 ip，:: 后跟目录则显示目录列表，跟目录+文件则�
 
 #### 2. 复现步骤
 
->1. 将 CentOS 克隆两份，一份为 server，一份为 client。
->2. 在 CentOS server 上安装 rsync，安装 xampp，将rsync的默认目录设置为 xampp 的网站根目录。
->3. 在 CentOS client 上安装 rsync，下载网站的 index.php；写一个测试用的 test.php，上传至网站根目录并访问。
+>1.将 CentOS 克隆两份，一份为 server，一份为 client。
+>2.在 CentOS server 上安装 rsync，安装 xampp，将rsync的默认目录设置为 xampp 的网站根目录。
+>3.在 CentOS client 上安装 rsync，下载网站的 index.php；写一个测试用的 test.php，上传至网站根目录并访问。
 
 具体如下：
 
@@ -136,7 +140,7 @@ read only = no # 设置是否只读
 
 >chmod -R 755 xampp-linux-x64-7.3.5-1-installer.run
 
-运行安装 xmapp
+安装 xmapp
 
 >./xampp-linux-x64-7.3.5-1-installer.run
 
@@ -168,19 +172,19 @@ CentOS 默认的防火墙为 firewall
 
 客户端即可访问
 
-![访问成功](imgs\2019-05-28-Rsync_Unauthorized_Access\1.png)
+![访问成功](https://upload-images.jianshu.io/upload_images/18110176-dab7caee4351e14d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 客户端访问 test 目录
 
 >rsync 192.168.xxx.xxx::test
 
-![访问目录](imgs\2019-05-28-Rsync_Unauthorized_Access\2.png)
+![访问目录](https://upload-images.jianshu.io/upload_images/18110176-2291fc185d6844d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 客户端下载 index.php 文件到本地的 /home/ 目录中
 
 >rsync 192.168.xxx.xxx::test/index.php /home/
 
-![下载文件](imgs\2019-05-28-Rsync_Unauthorized_Access\3.png)
+![下载文件](https://upload-images.jianshu.io/upload_images/18110176-2ac135b03ad2b958.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 在客户端中写一个包含了 phpinfo() 的脚本
 
@@ -190,7 +194,7 @@ CentOS 默认的防火墙为 firewall
 ?>
 ```
 
-![php 脚本](imgs\2019-05-28-Rsync_Unauthorized_Access\4.png)
+![php 脚本](https://upload-images.jianshu.io/upload_images/18110176-9180b24cff875858.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 将脚本上传至服务器
 
@@ -211,4 +215,4 @@ Permissive
 
 重新上传，上传文件成功，浏览器访问 192.168.xxx.xxx/a.php
 
-![脚本上传成功](imgs\2019-05-28-Rsync_Unauthorized_Access\5.png)
+![脚本上传成功](https://upload-images.jianshu.io/upload_images/18110176-c5e87b7b4bc408a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
