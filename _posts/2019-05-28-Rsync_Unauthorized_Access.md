@@ -237,9 +237,9 @@ hosts deny 禁止的主机，host的两项可以使用*表士任意。
 
 * 配置认证用户名或者密码
 
-* host allow/deny 来控制接入源IP
+* host allow/deny 来控制接入源 IP
 
-* uid和gid,使用足够但最小权限的账号进行
+* uid 和 gid，使用足够但最小权限的账号进行
 
 * 必要时候可以配置只读
 
