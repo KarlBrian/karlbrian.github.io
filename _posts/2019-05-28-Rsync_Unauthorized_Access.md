@@ -85,6 +85,7 @@ IP 为服务器 ip，:: 后跟目录则显示目录列表，跟目录+文件则�
 刚安装的 CentOS 不能连接网络，需要更改网卡配置。（CentOS 可以连网则跳过该步骤）
 
 >su
+>
 >vi /etc/sysconfig/network-scripts/ifcfg-ens33
 
 按i → 将 ONBOOT=no 改为 ONBOOT=yes → 按Esc → :wq
@@ -92,11 +93,13 @@ IP 为服务器 ip，:: 后跟目录则显示目录列表，跟目录+文件则�
 在物理机中打开 cmd，运行
 
 >net start "Vmware DHCP Service"
+>
 >net start "Vmware NAT Service"
 
 再进入 CentOS，输入
 
 >service network restart
+>
 >ping www.baidu.com
 
 正常访问网络。
