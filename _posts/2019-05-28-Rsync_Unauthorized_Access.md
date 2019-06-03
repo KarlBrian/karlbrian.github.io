@@ -168,17 +168,17 @@ CentOS 默认的防火墙为 firewall
 
 客户端即可访问
 
-![访问成功](https://upload-images.jianshu.io/upload_images/18110176-dab7caee4351e14d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![访问成功](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/.m9UmuMknPRq7YmMauWXHwLQLa6aIzmBqGYvBVzGE8Q!/o/dL8AAAAAAAAA&ek=1&kp=1&pt=0&bo=1gEmANYBJgADEDU!&tl=1&su=0229754657&tm=1559527200&sce=0-12-12&rf=2-9)
 
 客户端访问 test 目录
 `rsync 192.168.xxx.xxx::test`
 
-![访问目录](https://upload-images.jianshu.io/upload_images/18110176-2291fc185d6844d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![访问目录](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/z8Lfnk2AAiui8urHoq.yxgjN6FUqCURQ4i2x8udByvA!/o/dLgAAAAAAAAA&ek=1&kp=1&pt=0&bo=vQKlAL0CpQADEDU!&tl=1&su=056996257&tm=1559527200&sce=0-12-12&rf=2-9)
 
 客户端下载 index.php 文件到本地的 /home/ 目录中
 `rsync 192.168.xxx.xxx::test/index.php /home/`
 
-![下载文件](https://upload-images.jianshu.io/upload_images/18110176-2ac135b03ad2b958.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![下载文件](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/1NQczsk1BRhKqAejKzGPkZy*drqap6a7u2Zft5b8uss!/o/dFIBAAAAAAAA&ek=1&kp=1&pt=0&bo=cwNDAXMDQwEDEDU!&tl=1&su=0210915489&tm=1559527200&sce=0-12-12&rf=2-9)
 
 在客户端中写一个包含了 phpinfo() 的脚本
 
@@ -188,7 +188,7 @@ CentOS 默认的防火墙为 firewall
 ?>
 ```
 
-![php 脚本](https://upload-images.jianshu.io/upload_images/18110176-9180b24cff875858.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![php 脚本](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/KNX9SwNNR0Be4k942g7nyLP6FC.y7MQtewjSZd5d*pY!/o/dL8AAAAAAAAA&ek=1&kp=1&pt=0&bo=ZwFJAGcBSQADEDU!&tl=1&su=0144420673&tm=1559527200&sce=0-12-12&rf=2-9)
 
 将脚本上传至服务器
 `rsync a.php 192.168.xxx.xxx::test`
@@ -208,7 +208,7 @@ Permissive
 
 重新上传，上传文件成功，浏览器访问 192.168.xxx.xxx/a.php
 
-![脚本上传成功](https://upload-images.jianshu.io/upload_images/18110176-2ac1beb6e7cc1b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![脚本上传成功](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/.5hFTIDAW3ccyYtNzcp7u1x6NulN14Ph8Q612ahQhhE!/o/dFMBAAAAAAAA&ek=1&kp=1&pt=0&bo=iAWnAIgFpwADEDU!&tl=1&su=0237266017&tm=1559527200&sce=0-12-12&rf=2-9)
 
 ---
 
