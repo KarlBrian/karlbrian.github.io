@@ -178,7 +178,7 @@ CentOS 默认的防火墙为 firewall
 客户端下载 index.php 文件到本地的 /home/ 目录中
 `rsync 192.168.xxx.xxx::test/index.php /home/`
 
-![下载文件](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/1NQczsk1BRhKqAejKzGPkZy*drqap6a7u2Zft5b8uss!/o/dFIBAAAAAAAA&ek=1&kp=1&pt=0&bo=cwNDAXMDQwEDEDU!&tl=1&su=0210915489&tm=1559527200&sce=0-12-12&rf=2-9)
+![下载文件](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/ywGXODDJSkdOlOL0sZZQP5iKf8OnXgPr51kt7t4ZT3I!/o/dDYBAAAAAAAA&ek=1&kp=1&pt=0&bo=FgNCARYDQgEDEDU!&tl=1&su=046408481&tm=1559527200&sce=0-12-12&rf=2-9)
 
 在客户端中写一个包含了 phpinfo() 的脚本
 
@@ -208,7 +208,7 @@ Permissive
 
 重新上传，上传文件成功，浏览器访问 192.168.xxx.xxx/a.php
 
-![脚本上传成功](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/.5hFTIDAW3ccyYtNzcp7u1x6NulN14Ph8Q612ahQhhE!/o/dFMBAAAAAAAA&ek=1&kp=1&pt=0&bo=iAWnAIgFpwADEDU!&tl=1&su=0237266017&tm=1559527200&sce=0-12-12&rf=2-9)
+![脚本上传成功](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/6mE0wYBPXajUv3tv7tPRnGRFCQGV4m3GZJ*e02nfutY!/o/dL4AAAAAAAAA&ek=1&kp=1&pt=0&bo=ywGmAMsBpgADEDU!&tl=1&su=0190233729&tm=1559527200&sce=0-12-12&rf=2-9)
 
 ---
 
