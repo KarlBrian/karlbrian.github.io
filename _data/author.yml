@@ -1,0 +1,39 @@
+# Author settings
+name: 高峰
+title: 渗透测试工程师
+address: 中国, 杭州
+email: karl_brian_tbtb@yahoo.com
+github: KarlBrian
+gavatar: /assets/img/headPortrait.jpg
+workHistory:
+- work2:
+  company: 杭州漠坦尼科技有限公司
+  location: 中国，杭州
+  title: 渗透测试工程师
+  started: 2019
+  duration: (2019.4 - 今)
+  description: 学习中
+
+- work1:
+  company: 杭州安恒信息技术有限公司上海分公司
+  location: 中国, 上海
+  title: 安全服务工程师
+  started: 2018
+  duration: (2018.9 - 2018.10)
+  description: 安全巡检，渗透测试
+
+educationHistory:
+- education1:
+  organization: 江南大学
+  degree: 本科
+  major: 计算机科学与技术
+  started: 2015
+  duration: (2015.9 - 2019.6)
+  description: 组建江南大学网络空间安全俱乐部，参加各项CTF赛事
+languages:
+- language1:
+  name: 中文
+  proficiency: Native
+- language2:
+  name: English
+  proficiency: Limited
