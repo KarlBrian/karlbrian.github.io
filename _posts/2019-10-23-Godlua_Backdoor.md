@@ -7,7 +7,8 @@ pulished: true
 excerpt_separator: "比如你在地址栏输入"
 ---
 
-### **0 背景**
+## **0 背景**
+
 
 #### **1.DoH**
 
@@ -29,7 +30,8 @@ Godlua Backdoor 会使用硬编码域名、Pastebin.com、GitHub.com 和 DNS TXT
 
 ![两个版本对比图](http://r.photo.store.qq.com/psb?/V12ix5dK0c8VFD/gePX3wLkufNcbbMNausBH2BPnCIPg7pQo2chrA.MSwo!/o/dMMAAAAAAAAA&ek=1&kp=1&pt=0&bo=vAJcALwCXAADEDU!&tl=1&su=0258079041&tm=1571817600&sce=0-12-12&rf=2-9)
 
-#### **1 理解**
+## **1 理解**
+
 
 #### **1.什么是 C2 服务器**
 
@@ -57,11 +59,12 @@ var msg = a + “你好”；// 其中，“你好”就是硬编码。
 
 所谓冗余机制，就是指备份。当主要的 C2 服务器地址链连接出现问题时，冗余的方式可以立刻使用来替代主要连接方式。
 
-#### **5.总结**
+#### **5.概括**
 
 Godlua 的获利方式目前被判定为使被感染机器作为发动 ddos 攻击的机器人。该病毒通过一些手段（硬编码域名、Pastebin.com、GitHub.com 和 DNS TXT 记录等），保证了被感染的机器与发布指令的“大脑”—— C2 服务器的连通性，此外恶意利用 DoH 技术，保证了 bot 安全地获取 C2 服务器的域名解析。
 
-### **2 分析**
+## **2 分析**
+
 
 #### **1.Version 201811051556**
 
@@ -97,7 +100,8 @@ Godlua Backdoor Bot 样本在运行中会下载许多 Lua 脚本，可以分为�
 
 可以发现幻数从 Lua 变成了 God，虽然样本中有 "\$LuaVersion: God 5.1.4 C$$LuaAuthors: R. \$" 字符串，但事实上所采用的版本并不是 5.1.4，具体版本无法确定，但可以肯定的是大于 5.2。
 
-### **3 处置建议**
+## **3 处置建议**
+
 
 目前还没有完全看清 Godlua Backdoor 的传播途径，但研究者发现一些 Linux 用户是通过 confluence 漏洞利用（CVE-2019-3396）感染的，建议排查并修复该漏洞。此外建议对 Godluad Backdoor 相关 IP，URL 和域名进行监控和封锁。
 
