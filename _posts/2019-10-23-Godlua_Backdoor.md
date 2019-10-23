@@ -7,9 +7,9 @@ pulished: true
 excerpt_separator: "比如你在地址栏输入"
 ---
 
-###0 背景
+### 0 背景
 
-#####1.DoH
+##### 1.DoH
 
 DoH，全称 DNS over HTTPS。
 
@@ -19,7 +19,7 @@ DoH，全称 DNS over HTTPS。
 
 目前 Chrome 和火狐均已支持 DoH，让用户在浏览网页时可以更好的保护自己隐私。
 
-#####2.Godlua
+##### 2.Godlua
 
 2019年4月24号，有研究人员发现了一个可疑的 ELF 文件，该文件被一部分杀软误识别为挖矿程序。通过详细分析，确定为一款基于 Lua 编程语言的恶意后门软件。因为这个样本加载的 Lua 字节码文件幻数为 “God”，所以将它命名为 Godlua Backdoor。
 
@@ -29,13 +29,13 @@ Godlua Backdoor 会使用硬编码域名、Pastebin.com、GitHub.com 和 DNS TXT
 
 ![两个版本对比图](https://upload-images.jianshu.io/upload_images/9628399-651dc47a26c520b2.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-####1 理解
+#### 1 理解
 
-#####1.什么是 C2 服务器
+##### 1.什么是 C2 服务器
 
 C&C 服务器（即 C2 服务器）的全称是 Command and Control Server，翻译过来就是命令和控制服务器。C&C 服务器使目标机器可以接收来自服务器的命令，从而达到服务器控制目标机器的目的。该方法常用于病毒木马控制被感染的机器。**简单地说，C&C 服务器在僵尸网络中好比一个人的大脑，而被感染 bot 的僵尸计算机就好比人的手脚，大脑统一发送指令，手脚接受并执行指令。**
 
-#####2.什么是硬编码
+##### 2.什么是硬编码
 
 就是将一些数据（数值，字符串）嵌在代码逻辑当中。比如：
 
@@ -45,7 +45,7 @@ var msg = a + “你好”；// 其中，“你好”就是硬编码。
 
 硬编码数据通常只能通过编辑源代码和重新编译可执行文件来修改。**也就是说，Godlua 将一些 C2 域名写死在自己的程序当中。**
 
-#####3.什么是DNS TXT记录
+##### 3.什么是DNS TXT记录
 
 * 示例：ns1.exmaple.com. IN TXT "联系电话：XXXX"
 
@@ -53,23 +53,23 @@ var msg = a + “你好”；// 其中，“你好”就是硬编码。
 
 一般指某个主机名或域名的说明，或者联系方式，或者标注提醒等等。
 
-#####4.什么是冗余机制
+##### 4.什么是冗余机制
 
 所谓冗余机制，就是指备份。当主要的 C2 服务器地址链连接出现问题时，冗余的方式可以立刻使用来替代主要连接方式。
 
-#####5.总结
+##### 5.总结
 
 Godlua 的获利方式目前被判定为使被感染机器作为发动 ddos 攻击的机器人。该病毒通过一些手段（硬编码域名、Pastebin.com、GitHub.com 和 DNS TXT 记录等），保证了被感染的机器与发布指令的“大脑”—— C2 服务器的连通性，此外恶意利用 DoH 技术，保证了 bot 安全地获取 C2 服务器的域名解析。
 
-###2 分析
+### 2 分析
 
-#####1.Version 201811051556
+##### 1.Version 201811051556
 
 这是被发现的 Godlua Backdoor 的早期实现版本(201811051556)，它主要针对 Linux 平台，并支持2种 C2 指令，分别是执行 Linux 系统命令和执行自定义文件。它通过硬编码域名和 Github 项目描述2种方式来存储 C2 地址。
 
 ![C2冗余机制](https://upload-images.jianshu.io/upload_images/9628399-468d7d4ea3187202.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#####2.Version 20190415103713 ~ 20190621174731
+##### 2.Version 20190415103713 ~ 20190621174731
 
 它是 Godlua Backdoor 当前活跃版本，主要针对 Windows 和 Linux 平台，通过 Lua 实现主控逻辑并主要支持5种 C2 指令。
 
@@ -81,7 +81,7 @@ Godlua 的获利方式目前被判定为使被感染机器作为发动 ddos 攻�
 
 第三阶段：C2 服务器的域名硬编码在 Lua 字节码文件（run.png）中，bot 通过 DNS Over HTTPS 请求获取 C2 域名的 A 记录。
 
-#####3.Lua 脚本分析
+##### 3.Lua 脚本分析
 
 Godlua Backdoor Bot 样本在运行中会下载许多 Lua 脚本，可以分为运行、辅助、攻击三大类：
 
@@ -89,7 +89,7 @@ Godlua Backdoor Bot 样本在运行中会下载许多 Lua 脚本，可以分为�
 * 辅助：packet.png、curl.png、util.png、utils.png
 * 攻击：VM.png、CC.png
 
-#####4.Lua 幻数
+##### 4.Lua 幻数
 
 解密后的文件以 upgrade.png 为例，是 pre-compiled code，高亮部分为文件头。
 
@@ -97,15 +97,15 @@ Godlua Backdoor Bot 样本在运行中会下载许多 Lua 脚本，可以分为�
 
 可以发现幻数从 Lua 变成了 God，虽然样本中有 "\$LuaVersion: God 5.1.4 C$$LuaAuthors: R. \$" 字符串，但事实上所采用的版本并不是 5.1.4，具体版本无法确定，但可以肯定的是大于 5.2。
 
-###3 处置建议
+### 3 处置建议
 
 目前还没有完全看清 Godlua Backdoor 的传播途径，但研究者发现一些 Linux 用户是通过 confluence 漏洞利用（CVE-2019-3396）感染的，建议排查并修复该漏洞。此外建议对 Godluad Backdoor 相关 IP，URL 和域名进行监控和封锁。
 
-#####1.Confluence 远程代码执行漏洞（CVE-2019-3396）
+##### 1.Confluence 远程代码执行漏洞（CVE-2019-3396）
 
 官方已修复该漏洞，请到官网下载无漏洞版本：[https://www.atlassian.com/](https://www.atlassian.com/)
 
-#####2.IoC list
+##### 2.IoC list
 
 样本MD5
 
